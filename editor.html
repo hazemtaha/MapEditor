@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Map Editor</title>
+    <script type="text/javascript" src="./svg.js"></script>
+    <!-- <script type="text/javascript" src="./snap.svg.js"></script> -->
+    <script type="text/javascript" src="./svg.draggable.js"></script>
+    <script type="text/javascript" src="./svg.resize.js"></script>
+    <script type="text/javascript" src="./svg.select.js"></script>
+    <script type="text/javascript" src="./svg.topath.js"></script>
+    <script type="text/javascript" src="./svg.draw.js"></script>
+    <!-- <script type="text/javascript" src="./svg.path.js"></script> -->
+    <link rel="stylesheet" src="./svg.select.css" charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <div class="container" id="data">
+      <hr>
+      <label for="width" class="control-label">Width</label>
+      <input type="text" name="width" id="width" class="form-control" value="">
+      <br>
+      <label for="height" class="control-label">Height</label>
+      <input type="text" name="height" id="height" class="form-control" value="">
+      <br><br>
+      <input id="confirm" type="button" class="btn btn-primary" value="Confirm">
+      <hr>
+    </div>
+    <div id="toolbox" class="hidden">
+      <!--  leftside toolbox -->
+      <div class="col-sm-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Toolbox</h3>
+          </div>
+          <div class="panel-body">
+            <button type="button" class='btn btn-primary' name="rect">Rect</button>
+            <hr>
+            <button type="button" class='btn btn-primary' name="circle">Circle</button>
+            <hr>
+            <button type="button" class='btn btn-primary' name="oval">Oval</button>
+            <hr>
+            <button type="button" class='btn btn-primary' name="polygon">Polygon</button>
+            <hr>
+          </div>
+          <div class="panel-footer">
+
+          </div>
+        </div>
+      </div>
+      <!--  the main svg -->
+      <div id="drawing" class="hidden col-sm-10"></div>
+    </div>
+    <script type="text/javascript" src='./editor.js'></script>
+  </body>
+</html>
