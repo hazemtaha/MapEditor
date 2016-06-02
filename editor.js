@@ -1,5 +1,6 @@
 var app = {
-  blocks: []
+  blocks: [],
+  beacons: []
 };
 $('#confirm').click(function(e) {
     $('#data').hide();
