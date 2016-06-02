@@ -3,6 +3,10 @@ app.polygonInit = function() {
     $('#poly_btn').click(function(ev) {
       // modal for getting block name
         $('#blockInfo').modal('toggle');
+        $('#blCancel').click(function(ev){
+          $('#blDone').off('click');
+          $('#blCancel').off('click');
+        });
         // done button event
         $('#blDone').click(function(ev) {
           // get the block name
@@ -17,7 +21,7 @@ app.polygonInit = function() {
     });
 }
 
-function drawPolygon(blockName) {
+var drawPolygon = function(blockName) {
     // points we use to measure line length and contain it's text
     var pointOfLine, newPoint, dimText, textArr = [],
         // tmp variables and some utils variables
@@ -63,7 +67,7 @@ function drawPolygon(blockName) {
         // store the new point to use it in line length measurement
         newPoint = e.path[0].points[e.path[0].points.length - 1];
         // check if the current point is inside any shape in the svg
-        if (isInAny(newPoint, app.blocks)) {
+        if (app.isInAny(newPoint, app.blocks)) {
             isInBlock = true;
             // change the cursor PS: not working well
             polygon.style('cursor', 'not-allowed');
@@ -105,7 +109,7 @@ function drawPolygon(blockName) {
             // move the texts to the new positions
             moveText(e, textArr, calcLineLengths(e.path[0].points));
             // redraw the block name inside the block
-            blockNameText.move(polygon.bbox().cx, polygon.bbox().cy);
+            blockNameText.move(polygon.bbox().cx-20, polygon.bbox().cy-20);
         });
         // double click to select an element
         polygon.on('dblclick', function(ev) {
@@ -118,7 +122,7 @@ function drawPolygon(blockName) {
                 // move text to their new position after resize is ended
                 moveText(e, textArr, calcLineLengths(e.path[0].points));
                 // redraw the block name inside the block
-                blockNameText.move(polygon.bbox().cx, polygon.bbox().cy);
+                blockNameText.move(polygon.bbox().cx-20, polygon.bbox().cy-20);
             });
             // add keydown event to the document to unselect the shape
             $(document).on('keydown', function(e) {
@@ -149,14 +153,14 @@ function drawPolygon(blockName) {
     }); // end of drawstop
     polygon.on('drawdone', function(e) {
       // add the drawn shape into the block array
-        var ind = app.blocks.push({
+        app.blocks.push({
             shape: polygon,
             name: blockName
         });
         // delete the mouse down event
         app.svg.off('mousedown');
         // draw the block name inside the block
-        blockNameText = app.svg.text(blockName).move(polygon.bbox().cx, polygon.bbox().cy).style('fill', '#767676');
+        blockNameText = app.svg.text(blockName).move(polygon.bbox().cx-20, polygon.bbox().cy-20).style('fill', '#767676');
     }); // end of drawdone
 }
 // calculate the center point of every line in the shape passed
@@ -221,7 +225,7 @@ var moveText = function(e, textArr, lnLengths) {
         }
     }
     // determine if a point is inside a polygon or not
-var isInside = function(point, polygon) {
+app.isInside = function(point, polygon) {
         var x = point.x,
             y = point.y,
             inside = false;
@@ -237,14 +241,13 @@ var isInside = function(point, polygon) {
         return inside;
     }
 // check if the given point is inside any shape of the given shapes
-var isInAny = function(point, blocks) {
+app.isInAny = function(point, blocks) {
     var isInAny = false,
         shape;
     for (var i = 0; i < blocks.length; i++) {
         shape = blocks[i].shape.array().value;
-        if (isInside(point, shape)) {
-            isInAny = true;
-            break;
+        if (app.isInside(point, shape)) {
+            return blocks[i];
         }
     }
     return isInAny;
