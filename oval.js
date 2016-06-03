@@ -29,7 +29,8 @@ app.ovalInit = function() {
             oval.on('drawstop', function(e) {
                 app.index = app.blocks.push({
                     shape: oval,
-                    name: blockName
+                    name: blockName,
+                    type: 'oval'
                 });
                 oval.draggable();
                 oval.on('dragend', function(e) {
@@ -59,7 +60,7 @@ app.ovalInit = function() {
         });
     });
 }
-app.insideOval = function(point,block){
+app.isInsideOval = function(point,block){
   var inOval = false;
   var dx = point.x-block.shape.bbox().cx;
   var dy = point.y-block.shape.bbox().cy;

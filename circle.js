@@ -37,7 +37,7 @@ app.circleInit = function() {
       text.text(blockName+"\n"+"R= "+Math.round(radius)).move(circle.bbox().cx,circle.bbox().cy);
     });
     circle.on('drawstop', function(e){
-      app.index = app.blocks.push({ shape: circle,name: blockName });
+      app.index = app.blocks.push({ shape: circle,name: blockName, type: 'circle' });
       circle.draggable();
       circle.on('dragend', function(e) {
         text.move(circle.bbox().cx,circle.bbox().cy);
@@ -62,21 +62,14 @@ app.circleInit = function() {
             $(document).off('keydown');
           }
         });
-
-
       });
-      var testPoint = {x:0,y:0};
-      console.log(app.insideCircle(testPoint,app.blocks[0]));
-
     });
-
         $('#blDone').off('click');
-
     });
 
   });
 }
-app.insideCircle = function(point,block){
+app.isInsideCircle = function(point,block){
   var inCircle = false;
   var x1 = point.x;
   var x2 = block.shape.bbox().cx;

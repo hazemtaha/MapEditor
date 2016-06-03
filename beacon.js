@@ -47,7 +47,10 @@ var drawBeacon = function(beaconInfo) {
             }).attr('fill', '#6699cc').move(x - 20, y - 22);
             app.svg.off('mousemove');
             app.svg.off('click');
+            var log = app.isInAny({x: beacon.bbox().cx, y: beacon.bbox().cy},app.blocks);
+            console.log(log);
             app.beacons.push({beacon: beacon, info: beaconInfo});
+
         });// end of click
 
     } // end of drawBeacon

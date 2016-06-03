@@ -8,8 +8,8 @@ $('#confirm').click(function(e) {
     $('#drawing').removeClass('hidden');
     $('#toolbox').removeClass('hidden');
     // floor width and height
-    var width = $('#width').val();
-    var height = $('#height').val();
+    var width = $('#width').val()*5;
+    var height = $('#height').val()*5;
     // draw the floor
     app.svg = SVG('drawing').size(width, height);
     var rect = app.svg.rect(width, height).attr({
