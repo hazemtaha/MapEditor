@@ -51,8 +51,8 @@ app.ovalInit = function() {
           }
         });
       });
-      var testPoint = {x:0,y:0};
-      console.log(app.insideCircle(testPoint,app.blocks[0]));
+      // var testPoint = {x:0,y:0};
+      // console.log(app.insideCircle(testPoint,app.blocks[0]));
     });
 
       $('#blDone').off('click');
