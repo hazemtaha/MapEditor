@@ -22,9 +22,10 @@ app.ovalInit = function() {
     });
     //$('#oval_btn').off('click');
     oval.on('drawupdate', function(e){
+      //console.log(oval.bbox());
       text.text(blockName+"\n"+oval.node.attributes.rx.nodeValue/5+"X"+oval.node.attributes.ry.nodeValue/5).move(oval.node.cx.baseVal.value,oval.node.cy.baseVal.value);
     });
-    oval.on('drawstop', function(e){
+      oval.on('drawstop', function(e){
       app.index = app.blocks.push({ shape:oval,name: blockName });
       oval.draggable();
       oval.on('dragend', function(e) {
@@ -50,6 +51,8 @@ app.ovalInit = function() {
           }
         });
       });
+      var testPoint = {x:0,y:0};
+      console.log(app.insideCircle(testPoint,app.blocks[0]));
     });
 
       $('#blDone').off('click');
@@ -57,4 +60,18 @@ app.ovalInit = function() {
   });
 
 
+}
+app.insideOval = function(point,block){
+  var inOval = false;
+  var dx = point.x-block.shape.bbox().cx;
+  var dy = point.y-block.shape.bbox().cy;
+  var x = dx*dx;
+  x = x/(block.shape.bbox().w*block.shape.bbox().w);
+  var y = dy*dy;
+  y = y/(block.shape.bbox().h*block.shape.bbox().h);
+  if((x+y)<=1)
+  {
+    inOval = true;
+  }
+  return inOval;
 }

@@ -28,11 +28,12 @@ app.rectInit = function() {
         });
         //$('#rect_btn').off('click');
         rect.on('drawupdate', function(e){
+          //console.log(rect.bbox());
           x2 = e.detail.p.x;
           y2 = e.detail.p.y;
-         width = Math.abs(x2-x1)/5;
-         height = Math.abs(y2-y1)/5;
-         text.text(blockName+"\n"+width+"X"+height).move(rect.bbox().cx,rect.bbox().cy);
+         width = Math.abs(x2-x1)/app.scale_width;
+         height = Math.abs(y2-y1)/app.scale_height;
+         text.text(blockName+"\n"+rect.bbox().w/app.scale_width+"X"+rect.bbox().h/app.scale_height).move(rect.bbox().cx,rect.bbox().cy);
         });
         rect.on('drawstop', function(e){
           app.index = app.blocks.push({ shape: rect,name: blockName });
@@ -45,7 +46,7 @@ app.rectInit = function() {
             rect.selectize().resize();
             //console.log();
             rect.on('resizedone',function(e){
-              text.text(blockName+"\n"+rect.bbox().w/5+"X"+rect.bbox().h/5).move(rect.bbox().cx,rect.bbox().cy);
+              text.text(blockName+"\n"+rect.bbox().w/app.scale_width+"X"+rect.bbox().h/app.scale_height).move(rect.bbox().cx,rect.bbox().cy);
               rect.selectize(false);
             });
             $(document).on('keydown', function(e){
@@ -63,13 +64,22 @@ app.rectInit = function() {
             });
 
           });
+          var testPoint = {x:0,y:0};
+          console.log(app.insideCircle(testPoint,app.blocks[0]));
         });
         $('#blDone').off('click');
       });
-
-
     });
-
-
-
+}
+app.insideRect = function(point,block){
+  var inRect = false;
+  var x1 = block.shape.bbox().x;
+  var x2 = block.shape.bbox().x2;
+  var y1 = block.shape.bbox().y;
+  var y2 = block.shape.bbox().y2;
+  if(point.x>=x1 && point.x<=x2 && point.y>=y1 && point.y<=y2)
+  {
+    inRect = true;
+  }
+  return inRect;
 }

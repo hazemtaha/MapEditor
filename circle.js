@@ -33,6 +33,7 @@ app.circleInit = function() {
       text.text(blockName+"\n"+"R= "+Math.round(radius)).move(circle.bbox().cx,circle.bbox().cy);
     });
     circle.on('drawstop', function(e){
+      //console.log(circle.bbox());
       app.index = app.blocks.push({ shape: circle,name: blockName });
       circle.draggable();
       circle.on('dragend', function(e) {
@@ -61,12 +62,30 @@ app.circleInit = function() {
 
 
       });
-
+      var testPoint = {x:0,y:0};
+      console.log(app.insideCircle(testPoint,app.blocks[0]));
 
     });
 
         $('#blDone').off('click');
+
     });
 
   });
 }
+app.insideCircle = function(point,block){
+  var inCircle = false;
+  var x1 = point.x;
+  var x2 = block.shape.bbox().cx;
+  var y1 = point.y;
+  var y2 = block.shape.bbox().cy;
+  var x = Math.abs(x2-x1);
+  var y = Math.abs(y2-y1);
+  var distance = Math.sqrt(Math.pow(x, 2)+Math.pow(y, 2));
+  if(distance<=block.shape.bbox().w)
+  {
+    inCircle = true;
+  }
+  return inCircle;
+}
+// console.log(app.insideCircle);
