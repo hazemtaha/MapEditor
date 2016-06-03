@@ -31,6 +31,7 @@
       <input id="confirm" type="button" class="btn btn-primary" value="Confirm">
       <hr>
     </div>
+    <br><br>
     <div id="toolbox" class="hidden">
       <!--  leftside toolbox -->
       <div class="col-sm-2">
@@ -47,6 +48,7 @@
             <hr>
             <button type="button" id="poly_btn"class='btn btn-primary' name="polygon">Polygon</button>
             <hr>
+            <button type="button" id="beacon_btn"class='btn btn-primary' name="beacon">Beacon</button>
           </div>
           <div class="panel-footer">
 
@@ -55,6 +57,7 @@
       </div>
       <!--  the main svg -->
       <div id="drawing" class="hidden col-sm-10"></div>
+      <!--  block info modal -->
       <div class="modal fade" id="blockInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -76,5 +79,6 @@
     </div>
     <script type="text/javascript" src='./editor.js'></script>
     <script type="text/javascript" src='./polygon.js'></script>
+    <script type="text/javascript" src='./beacon.js'></script>
   </body>
 </html>

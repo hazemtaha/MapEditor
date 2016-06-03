@@ -12,9 +12,8 @@ $('#confirm').click(function(e) {
     // draw the floor
     app.svg = SVG('drawing').size(width, height);
     var rect = app.svg.rect(width, height).attr({
-        fill: '#bdbdbd',
-        rx: 25,
-        ry: 25
+        fill: '#bdbdbd'
     });
     app.polygonInit();
+    app.beaconInit();
 });

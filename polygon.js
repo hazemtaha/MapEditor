@@ -113,7 +113,6 @@ var drawPolygon = function(blockName) {
         });
         // double click to select an element
         polygon.on('dblclick', function(ev) {
-            console.log("dblclick");
             // enable resizeing
             polygon.selectize({
                 deepSelect: true
@@ -152,6 +151,7 @@ var drawPolygon = function(blockName) {
         });
     }); // end of drawstop
     polygon.on('drawdone', function(e) {
+      polygon.addClass('block');
       // add the drawn shape into the block array
         app.blocks.push({
             shape: polygon,
