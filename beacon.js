@@ -1,8 +1,30 @@
 app.beaconInit = function() {
-    $('#beacon_btn').click(drawBeacon);
+    $('#beacon_btn').click(function(ev) {
+      // modal for getting block name
+        $('#beaconInfo').modal('toggle');
+        $('#bcnCancel').click(function(ev){
+          $('#bcnDone').off('click');
+          $('#bcnCancel').off('click');
+        });
+        // done button event
+        $('#bcnDone').click(function(ev) {
+          // get the block name
+            var beaconName = $('#beaconName').val();
+            var beaconUUID = $('#uuid').val();
+            var beaconMajor = $('#major').val();
+            var beaconMinor = $('#minor').val();
+            var beaconInfo = {name: beaconName, uuid: beaconUUID, major: beaconMajor, minor: beaconMinor};
+            // close the modal
+            $('#beaconInfo').modal('toggle');
+            // start drawing
+            drawBeacon(beaconInfo);
+            // delete the click event on done button so that it dosen't get attached multiple times
+            $('#bcnDone').off('click');
+        });
+    });
 }
 
-var drawBeacon = function(ev) {
+var drawBeacon = function(beaconInfo) {
         var beacon;
         app.svg.on('mousemove', function(e) {
             var x = e.pageX - $('#' + app.svg.id()).offset().left;
@@ -25,7 +47,7 @@ var drawBeacon = function(ev) {
             }).attr('fill', '#6699cc').move(x - 20, y - 22);
             app.svg.off('mousemove');
             app.svg.off('click');
-            app.beacons.push({beacon: beacon});
+            app.beacons.push({beacon: beacon, info: beaconInfo});
         });// end of click
 
     } // end of drawBeacon

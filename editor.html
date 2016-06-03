@@ -76,6 +76,34 @@
           </div>
         </div>
       </div>
+      <!--  beacon info modal -->
+      <div class="modal fade" id="beaconInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="">Beacon Info</h4>
+            </div>
+            <div class="modal-body">
+              <label for="name" class="control-label">Name</label>
+              <input type="text" name="name" class="form-control" id="beaconName" value="">
+              <br>
+              <label for="uuid" class="control-label">UUID</label>
+              <input type="text" name="uuid" class="form-control" id="uuid" value="">
+              <br>
+              <label for="major" class="control-label">Major</label>
+              <input type="text" name="major" class="form-control" id="major" value="">
+              <br>
+              <label for="minor" class="control-label">Minor</label>
+              <input type="text" name="name" class="form-control" id="minor" value="">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="bcnCancel">Close</button>
+              <button type="button" class="btn btn-primary" id="bcnDone">Done</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script type="text/javascript" src='./editor.js'></script>
     <script type="text/javascript" src='./rect.js'></script>

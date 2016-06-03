@@ -1,6 +1,10 @@
 app.rectInit = function() {
   $('#rect_btn').on("click",function(e){
     $('#blockInfo').modal('toggle');
+    $('#blCancel').click(function(event) {
+      $('#blCancel').off('click');
+      $('#blDone').off('click');
+    });
     $('#blDone').click(function(event) {
         var blockName = $('#blockName').val();
         $('#blockInfo').modal('toggle');
@@ -36,7 +40,7 @@ app.rectInit = function() {
         });
         rect.on('drawstop', function(e){
           app.index = app.blocks.push({ shape: rect,name: blockName });
-          //console.log(app.index);
+          console.log(rect);
           rect.draggable();
           rect.on('dragend', function(e) {
             text.move(rect.bbox().cx,rect.bbox().cy);
