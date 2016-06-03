@@ -40,7 +40,7 @@ app.rectInit = function() {
          text.text(blockName+"\n"+rect.bbox().w/app.scale_width+"X"+rect.bbox().h/app.scale_height).move(rect.bbox().cx,rect.bbox().cy);
         });
         rect.on('drawstop', function(e){
-          app.index = app.blocks.push({ shape: rect,name: blockName });
+          app.index = app.blocks.push({ shape: rect,name: blockName, type:'rect' });
           console.log(rect);
           rect.draggable();
           rect.on('dragend', function(e) {
@@ -68,14 +68,12 @@ app.rectInit = function() {
             });
 
           });
-          // var testPoint = {x:0,y:0};
-          // console.log(app.insideCircle(testPoint,app.blocks[0]));
         });
         $('#blDone').off('click');
       });
     });
 }
-app.insideRect = function(point,block){
+app.isInsideRect = function(point,block){
   var inRect = false;
   var x1 = block.shape.bbox().x;
   var x2 = block.shape.bbox().x2;

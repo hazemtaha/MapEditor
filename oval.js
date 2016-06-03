@@ -22,10 +22,10 @@ app.ovalInit = function() {
     //$('#oval_btn').off('click');
     oval.on('drawupdate', function(e){
       console.log(oval.bbox());
-      text.text(blockName+"\n"+oval.bbox().w/5+"X"+oval.bbox().h/5).move(oval.bbox().cx,oval.bbox().cy);
+      text.text(blockName+"\n"+oval.bbox().w/(2*5)+"X"+oval.bbox().h/(2*5)).move(oval.bbox().cx,oval.bbox().cy);
     });
       oval.on('drawstop', function(e){
-      app.index = app.blocks.push({ shape:oval,name: blockName });
+      app.index = app.blocks.push({ shape:oval,name: blockName, type: 'oval' });
       oval.draggable();
       oval.on('dragend', function(e) {
         text.move(oval.bbox().cx,oval.bbox().cy);
@@ -33,7 +33,7 @@ app.ovalInit = function() {
       oval.on('dblclick',function(ev){
         oval.selectize().resize();
         oval.on('resizedone',function(e){
-          text.text(blockName+"\n"+oval.bbox().w/5+"X"+oval.bbox().h/5).move(oval.bbox().cx,oval.bbox().cy);
+          text.text(blockName+"\n"+oval.bbox().w/(5*2)+"X"+oval.bbox().h/(5*2)).move(oval.bbox().cx,oval.bbox().cy);
           oval.selectize(false);
         });
         $(document).on('keydown', function(e){
@@ -60,14 +60,14 @@ app.ovalInit = function() {
 
 
 }
-app.insideOval = function(point,block){
+app.isInsideOval = function(point,block){
   var inOval = false;
   var dx = point.x-block.shape.bbox().cx;
   var dy = point.y-block.shape.bbox().cy;
   var x = dx*dx;
-  x = x/(block.shape.bbox().w*block.shape.bbox().w);
+  x = x/((block.shape.bbox().w/2)*(block.shape.bbox().w/2));
   var y = dy*dy;
-  y = y/(block.shape.bbox().h*block.shape.bbox().h);
+  y = y/((block.shape.bbox().h/2)*(block.shape.bbox().h/2));
   if((x+y)<=1)
   {
     inOval = true;
