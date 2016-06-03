@@ -1,3 +1,7 @@
+var app = {
+  blocks : [],
+};
+app.index;
 $('#confirm').click(function(e) {
     $('#data').hide();
     $('#drawing').removeClass('hidden');
@@ -6,10 +10,14 @@ $('#confirm').click(function(e) {
     var width = $('#width').val() * 5;
     var height = $('#height').val() * 5;
     // draw the floor
-    var svg = SVG('drawing').size(width, height);
-    var rect = svg.rect(width, height).attr({
+    app.svg = SVG('drawing').size(width, height);
+    var rect = app.svg.rect(width, height).attr({
         fill: '#bdbdbd',
         rx: 10,
         ry: 5
     });
+    //app.aho = "Hello";
+    app.rectInit();
+    app.circleInit();
+    app.ovalInit();
 });
