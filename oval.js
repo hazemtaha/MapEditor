@@ -1,6 +1,4 @@
 app.ovalInit = function() {
-
-
     $('#oval_btn').on("click", function(e) {
         $('#blockInfo').modal('toggle');
         $('#blCancel').click(function(event) {
@@ -57,10 +55,21 @@ app.ovalInit = function() {
                     });
                 });
             });
-
             $('#blDone').off('click');
         });
     });
-
-
+}
+app.insideOval = function(point,block){
+  var inOval = false;
+  var dx = point.x-block.shape.bbox().cx;
+  var dy = point.y-block.shape.bbox().cy;
+  var x = dx*dx;
+  x = x/(block.shape.bbox().w*block.shape.bbox().w);
+  var y = dy*dy;
+  y = y/(block.shape.bbox().h*block.shape.bbox().h);
+  if((x+y)<=1)
+  {
+    inOval = true;
+  }
+  return inOval;
 }
