@@ -1,11 +1,10 @@
 app.ovalInit = function() {
-
-
     $('#oval_btn').on("click",function(e){
       $('#blockInfo').modal('toggle');
       $('#blDone').click(function(event) {
           var blockName = $('#blockName').val();
           $('#blockInfo').modal('toggle');
+
     var text;
     var oval = app.svg.ellipse().draw().attr({
       fill: '#00FF00',
@@ -22,19 +21,19 @@ app.ovalInit = function() {
     });
     //$('#oval_btn').off('click');
     oval.on('drawupdate', function(e){
-      //console.log(oval.bbox());
-      text.text(blockName+"\n"+oval.node.attributes.rx.nodeValue/5+"X"+oval.node.attributes.ry.nodeValue/5).move(oval.node.cx.baseVal.value,oval.node.cy.baseVal.value);
+      console.log(oval.bbox());
+      text.text(blockName+"\n"+oval.bbox().w/5+"X"+oval.bbox().h/5).move(oval.bbox().cx,oval.bbox().cy);
     });
       oval.on('drawstop', function(e){
       app.index = app.blocks.push({ shape:oval,name: blockName });
       oval.draggable();
       oval.on('dragend', function(e) {
-        text.move(oval.node.cx.baseVal.value,oval.node.cy.baseVal.value);
+        text.move(oval.bbox().cx,oval.bbox().cy);
       });
       oval.on('dblclick',function(ev){
         oval.selectize().resize();
         oval.on('resizedone',function(e){
-          text.text(blockName+"\n"+oval.node.attributes.rx.nodeValue/5+"X"+oval.node.attributes.ry.nodeValue/5).move(oval.node.cx.baseVal.value,oval.node.cy.baseVal.value);
+          text.text(blockName+"\n"+oval.bbox().w/5+"X"+oval.bbox().h/5).move(oval.bbox().cx,oval.bbox().cy);
           oval.selectize(false);
         });
         $(document).on('keydown', function(e){

@@ -1,6 +1,10 @@
 app.circleInit = function() {
   $('#circle_btn').on("click",function(e){
     $('#blockInfo').modal('toggle');
+    $('#blCancel').click(function(event) {
+      $('#blCancel').off('click');
+      $('#blDone').off('click');
+    });
     $('#blDone').click(function(event) {
         var blockName = $('#blockName').val();
         $('#blockInfo').modal('toggle');
@@ -33,7 +37,6 @@ app.circleInit = function() {
       text.text(blockName+"\n"+"R= "+Math.round(radius)).move(circle.bbox().cx,circle.bbox().cy);
     });
     circle.on('drawstop', function(e){
-      //console.log(circle.bbox());
       app.index = app.blocks.push({ shape: circle,name: blockName });
       circle.draggable();
       circle.on('dragend', function(e) {
@@ -88,4 +91,3 @@ app.insideCircle = function(point,block){
   }
   return inCircle;
 }
-// console.log(app.insideCircle);
