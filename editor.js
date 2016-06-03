@@ -1,5 +1,6 @@
 var app = {
-  blocks : [],
+  blocks: [],
+  beacons: []
 };
 app.index;
 $('#confirm').click(function(e) {
@@ -13,11 +14,11 @@ $('#confirm').click(function(e) {
     app.svg = SVG('drawing').size(width, height);
     var rect = app.svg.rect(width, height).attr({
         fill: '#bdbdbd',
-        rx: 10,
-        ry: 5
+        rx: 25,
+        ry: 25
     });
-    //app.aho = "Hello";
     app.rectInit();
     app.circleInit();
     app.ovalInit();
+    app.polygonInit();
 });
