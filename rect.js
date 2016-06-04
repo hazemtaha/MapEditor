@@ -41,7 +41,6 @@ app.rectInit = function() {
         });
         rect.on('drawstop', function(e){
           app.index = app.blocks.push({ shape: rect,name: blockName, type:'rect' });
-          console.log(rect);
           rect.draggable();
           rect.on('dragend', function(e) {
             text.move(rect.bbox().cx,rect.bbox().cy);

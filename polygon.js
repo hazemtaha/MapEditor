@@ -246,7 +246,6 @@ app.isInsidePoly = function(point, polygon) {
 app.isInAny = function(point, blocks) {
     var isInAny = false,
         shape;
-        console.log(blocks);
     for (var i = 0; i < blocks.length; i++) {
         shape = blocks[i];
         //console.log(shape.type);
