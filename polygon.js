@@ -113,7 +113,6 @@ var drawPolygon = function(blockName) {
             });
             // double click to select an element
             polygon.on('dblclick', function(ev) {
-                console.log("dblclick");
                 // enable resizeing
                 polygon.selectize({
                     deepSelect: true
@@ -146,6 +145,7 @@ var drawPolygon = function(blockName) {
                         for (var i = 0; i < textArr.length; i++) {
                             textArr[i].clear();
                         }
+                        blockNameText.clear();
                         $(document).off('keydown');
                     }
                 });
