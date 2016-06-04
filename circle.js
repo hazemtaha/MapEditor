@@ -34,7 +34,7 @@ app.circleInit = function() {
       var x = (x2-x1)*(x2-x1);
       var y = (y2-y1)*(y2-y1);
       radius = Math.sqrt(x+y)/5;
-      text.text(blockName+"\n"+"R= "+Math.round(circle.bbox().w/5)).move(circle.bbox().cx,circle.bbox().cy);
+      text.text(blockName+"\n"+"R= "+Math.round(circle.bbox().w/(app.scale(app.width,app.height)*2))).move(circle.bbox().cx,circle.bbox().cy);
     });
     circle.on('drawstop', function(e){
       app.index = app.blocks.push({ shape: circle,name: blockName, type: 'circle' });
@@ -45,7 +45,7 @@ app.circleInit = function() {
       circle.on('dblclick',function(ev){
         circle.selectize().resize();
         circle.on('resizedone',function(e){
-          text.text(blockName+"\n"+"R= "+Math.round(circle.bbox().w/5)).move(circle.bbox().cx,circle.bbox().cy);
+          text.text(blockName+"\n"+"R= "+Math.round(circle.bbox().w/(app.scale(app.width,app.height)*2))).move(circle.bbox().cx,circle.bbox().cy);
           circle.selectize(false);
         });
           $(document).on('keydown', function(e){

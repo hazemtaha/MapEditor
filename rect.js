@@ -37,7 +37,7 @@ app.rectInit = function() {
           y2 = e.detail.p.y;
          width = Math.abs(x2-x1)/app.scale_width;
          height = Math.abs(y2-y1)/app.scale_height;
-         text.text(blockName+"\n"+rect.bbox().w/app.scale_width+"X"+rect.bbox().h/app.scale_height).move(rect.bbox().cx,rect.bbox().cy);
+         text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
         });
         rect.on('drawstop', function(e){
           app.index = app.blocks.push({ shape: rect,name: blockName, type:'rect' });
@@ -50,7 +50,7 @@ app.rectInit = function() {
             rect.selectize().resize();
             //console.log();
             rect.on('resizedone',function(e){
-              text.text(blockName+"\n"+rect.bbox().w/app.scale_width+"X"+rect.bbox().h/app.scale_height).move(rect.bbox().cx,rect.bbox().cy);
+              text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
               rect.selectize(false);
             });
             $(document).on('keydown', function(e){
