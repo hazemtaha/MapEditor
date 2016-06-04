@@ -22,7 +22,7 @@ app.ovalInit = function() {
     //$('#oval_btn').off('click');
     oval.on('drawupdate', function(e){
       console.log(oval.bbox());
-      text.text(blockName+"\n"+oval.bbox().w/(2*5)+"X"+oval.bbox().h/(2*5)).move(oval.bbox().cx,oval.bbox().cy);
+      text.text(blockName+"\n"+oval.bbox().w/(2*app.scale(app.width,app.height))+"X"+oval.bbox().h/(2*app.scale(app.width,app.height))).move(oval.bbox().cx,oval.bbox().cy);
     });
       oval.on('drawstop', function(e){
       app.index = app.blocks.push({ shape:oval,name: blockName, type: 'oval' });
@@ -33,7 +33,7 @@ app.ovalInit = function() {
       oval.on('dblclick',function(ev){
         oval.selectize().resize();
         oval.on('resizedone',function(e){
-          text.text(blockName+"\n"+oval.bbox().w/(5*2)+"X"+oval.bbox().h/(5*2)).move(oval.bbox().cx,oval.bbox().cy);
+          text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
           oval.selectize(false);
         });
         $(document).on('keydown', function(e){
