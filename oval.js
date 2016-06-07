@@ -7,9 +7,9 @@ app.ovalInit = function() {
 
     var text;
     var oval = app.svg.ellipse().draw().attr({
-      fill: '#00FF00',
-      stroke: "yellow" ,
-      'stroke-width': 4
+      fill: '#1ABC9C',
+      stroke: "black" ,
+      'stroke-width': 5
     });
     oval.on('drawstart', function(e){
       text =  app.svg.text('').font({

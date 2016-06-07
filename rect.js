@@ -9,9 +9,9 @@ app.rectInit = function() {
         var blockName = $('#blockName').val();
         $('#blockInfo').modal('toggle');
         var rect = app.svg.rect().draw().attr({
-          fill: '#d1fffe',
-          stroke: "green" ,
-          'stroke-width': 4
+          fill: '#1ABC9C',
+          stroke: "black" ,
+          'stroke-width': 5
         });
         var x1;
         var y1;
@@ -50,7 +50,8 @@ app.rectInit = function() {
             rect.selectize().resize();
             //console.log();
             rect.on('resizedone',function(e){
-              text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+              var room_type = text.text().split("\n")[0];
+              text.text(room_type+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
               rect.selectize(false);
             });
             $(document).on('keydown', function(e){
@@ -66,6 +67,89 @@ app.rectInit = function() {
                 $(document).off('keydown');
               }
             });
+            ////////////
+            $('#setting_btn').on('click',function(){
+              $('#toolbox_btns').addClass('hidden');
+              $('#room_type').removeClass('hidden');
+
+                $('#living').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false);
+                  rect.fill('#FFA07A');
+                  text.text("Living Room"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#reception').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false);
+                  rect.fill('#778899');
+                  text.text("Reception"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#kitchen').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#C8F0C8');
+                  text.text("Kitchen"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#hallway').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#FF5733');
+                  text.text("Hallway"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#bed_room').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#FFC0CB');
+                  text.text("Bed Room"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#bathroom').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#B0C4DE');
+                  text.text("Bathroom"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#balcony').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#9ACD32');
+                  text.text("Balcony"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#cloest').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#7B68EE');
+                  text.text("Cloest"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#other').on('click',function(){
+                  if(rect._memory._selectHandler.rectSelection.isSelected)
+                  {
+                  rect.selectize(false)
+                  rect.fill('#BA55D3');
+                  text.text("Other"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  }
+                });
+                $('#back').on('click',function(){
+                  $('#toolbox_btns').removeClass('hidden');
+                  $('#room_type').addClass('hidden');
+                });
+            });
+            /////////////
 
           });
         });

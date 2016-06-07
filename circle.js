@@ -10,9 +10,9 @@ app.circleInit = function() {
         $('#blockInfo').modal('toggle');
     var x1,y1,x2,y2,radius,text;
     var circle = app.svg.circle().draw().attr({
-      fill: '#00FFFF',
-      stroke: "blue" ,
-      'stroke-width': 4
+      fill: '#1ABC9C',
+      stroke: "black" ,
+      'stroke-width': 5
     });
     //$('#circle_btn').off('click');
     circle.on('drawstart', function(e){
