@@ -6,7 +6,7 @@ app.ovalInit = function() {
           $('#blockInfo').modal('toggle');
 
     var text;
-    var oval = app.svg.ellipse().draw().attr({
+    var oval = app.svg.ellipse().draw({snapToGrid:8}).attr({
       fill: '#00FF00',
       stroke: "yellow" ,
       'stroke-width': 4

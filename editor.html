@@ -1,115 +1,126 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Map Editor</title>
-    <script type="text/javascript" src="./svg.js"></script>
-    <!-- <script type="text/javascript" src="./snap.svg.js"></script> -->
-    <script type="text/javascript" src="./svg.draggable.js"></script>
-    <script type="text/javascript" src="./svg.resize.js"></script>
-    <script type="text/javascript" src="./svg.select.js"></script>
-    <script type="text/javascript" src="./svg.topath.js"></script>
-    <script type="text/javascript" src="./svg.draw.js"></script>
-    <!-- <script type="text/javascript" src="./svg.path.js"></script> -->
-    <link rel="stylesheet" src="./svg.select.css" charset="utf-8">
-    <link rel="stylesheet" src="./editor.css" charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  </head>
-  <body>
-    <div class="container" id="data">
-      <hr>
-      <label for="width" class="control-label">Width</label>
-      <input type="text" name="width" id="width" class="form-control" value="">
-      <br>
-      <label for="height" class="control-label">Height</label>
-      <input type="text" name="height" id="height" class="form-control" value="">
-      <br><br>
-      <input id="confirm" type="button" class="btn btn-primary" value="Confirm">
-      <hr>
-    </div>
-    <br><br>
-    <div id="toolbox" class="hidden">
-      <!--  leftside toolbox -->
-      <div class="col-sm-2">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3 class="panel-title">Toolbox</h3>
-          </div>
-          <div class="panel-body">
-            <button type="button" id='rect_btn' class='btn btn-primary' name="rect">Rect</button>
+    <head>
+        <meta charset="utf-8">
+        <title>Map Editor</title>
+        <script type="text/javascript" src="./svg.js"></script>
+        <!-- <script type="text/javascript" src="./snap.svg.js"></script> -->
+        <script type="text/javascript" src="./svg.draggable.js"></script>
+        <script type="text/javascript" src="./svg.resize.js"></script>
+        <script type="text/javascript" src="./svg.select.js"></script>
+        <script type="text/javascript" src="./svg.topath.js"></script>
+        <script type="text/javascript" src="./svg.draw.js"></script>
+        <script type="text/javascript" src="./jquery-1.11.2.js"></script>
+        <script type="text/javascript" src="./bootstrap.min.js"></script>
+        <!-- <script type="text/javascript" src="./svg.path.js"></script> -->
+        <link rel="stylesheet" src="./svg.select.css" charset="utf-8">
+        <link rel="stylesheet" src="./editor.css" charset="utf-8">
+        <link rel="stylesheet" href="./bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body>
+        <div class="container" id="data">
             <hr>
-            <button type="button" id='circle_btn' class='btn btn-primary' name="circle">Circle</button>
+            <label for="width" class="control-label">Width</label>
+            <input type="text" name="width" id="width" class="form-control" value="">
+            <br>
+            <label for="height" class="control-label">Height</label>
+            <input type="text" name="height" id="height" class="form-control" value="">
+            <br><br>
+            <input id="confirm" type="button" class="btn btn-primary" value="Confirm">
             <hr>
-            <button type="button" id='oval_btn' class='btn btn-primary' name="oval">Oval</button>
-            <hr>
-            <button type="button" id="poly_btn"class='btn btn-primary' name="polygon">Polygon</button>
-            <hr>
-            <button type="button" id="beacon_btn"class='btn btn-primary' name="beacon">Beacon</button>
-          </div>
-          <div class="panel-footer">
+        </div>
+        <br><br>
+        <div id="toolbox" class="hidden">
+            <!--  leftside toolbox -->
+            <div class="col-sm-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Toolbox</h3>
+                    </div>
+                    <div class="panel-body">
+                        <button type="button" id='rect_btn' class='btn btn-primary' name="rect">Rect</button>
+                        <hr>
+                        <button type="button" id='circle_btn' class='btn btn-primary' name="circle">Circle</button>
+                        <hr>
+                        <button type="button" id='oval_btn' class='btn btn-primary' name="oval">Oval</button>
+                        <hr>
+                        <button type="button" id="poly_btn" class='btn btn-primary' name="polygon">Polygon</button>
+                        <hr>
+                        <button type="button" id="beacon_btn" class='btn btn-primary' name="beacon">Beacon</button>
+                    </div>
+                    <div class="panel-footer"></div>
+                </div>
+            </div>
+            <!--  the main svg -->
+            <div id="svgContainer" style="overflow:auto;height: 800px;
+        width: 1300;" class="hidden col-sm-10">
+                <svg id="drawing" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5"/>
+                        </pattern>
+                        <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+                            <rect width="100" height="100" fill="url(#smallGrid)"/>
+                            <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="1"/>
+                        </pattern>
+                    </defs>
 
-          </div>
+                    <rect id="gridRect" width="100%" height="100%" fill="url(#grid)"/>
+                </svg>
+            </div>
+            <!--  block info modal -->
+            <div class="modal fade" id="blockInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="">Block Info</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label for="name" class="control-label">Name</label>
+                            <input type="text" name="name" class="form-control" id="blockName" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="blCancel">Close</button>
+                            <button type="button" class="btn btn-primary" id="blDone">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  beacon info modal -->
+            <div class="modal fade" id="beaconInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="">Beacon Info</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label for="name" class="control-label">Name</label>
+                            <input type="text" name="name" class="form-control" id="beaconName" value="">
+                            <br>
+                            <label for="uuid" class="control-label">UUID</label>
+                            <input type="text" name="uuid" class="form-control" id="uuid" value="">
+                            <br>
+                            <label for="major" class="control-label">Major</label>
+                            <input type="text" name="major" class="form-control" id="major" value="">
+                            <br>
+                            <label for="minor" class="control-label">Minor</label>
+                            <input type="text" name="name" class="form-control" id="minor" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="bcnCancel">Close</button>
+                            <button type="button" class="btn btn-primary" id="bcnDone">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <!--  the main svg -->
-      <div id="drawing" class="hidden col-sm-10"></div>
-      <!--  block info modal -->
-      <div class="modal fade" id="blockInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="">Block Info</h4>
-            </div>
-            <div class="modal-body">
-              <label for="name" class="control-label">Name</label>
-              <input type="text" name="name" class="form-control" id="blockName" value="">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="blCancel">Close</button>
-              <button type="button" class="btn btn-primary" id="blDone">Done</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--  beacon info modal -->
-      <div class="modal fade" id="beaconInfo" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-              <h4 class="modal-title" id="">Beacon Info</h4>
-            </div>
-            <div class="modal-body">
-              <label for="name" class="control-label">Name</label>
-              <input type="text" name="name" class="form-control" id="beaconName" value="">
-              <br>
-              <label for="uuid" class="control-label">UUID</label>
-              <input type="text" name="uuid" class="form-control" id="uuid" value="">
-              <br>
-              <label for="major" class="control-label">Major</label>
-              <input type="text" name="major" class="form-control" id="major" value="">
-              <br>
-              <label for="minor" class="control-label">Minor</label>
-              <input type="text" name="name" class="form-control" id="minor" value="">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal" id="bcnCancel">Close</button>
-              <button type="button" class="btn btn-primary" id="bcnDone">Done</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script type="text/javascript" src='./editor.js'></script>
-    <script type="text/javascript" src='./rect.js'></script>
-    <script type="text/javascript" src='./circle.js'></script>
-    <script type="text/javascript" src='./oval.js'></script>
-    <script type="text/javascript" src='./polygon.js'></script>
-    <script type="text/javascript" src='./beacon.js'></script>
-  </body>
+        <script type="text/javascript" src='./editor.js'></script>
+        <script type="text/javascript" src='./rect.js'></script>
+        <script type="text/javascript" src='./circle.js'></script>
+        <script type="text/javascript" src='./oval.js'></script>
+        <script type="text/javascript" src='./polygon.js'></script>
+        <script type="text/javascript" src='./beacon.js'></script>
+    </body>
 </html>

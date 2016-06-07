@@ -8,7 +8,7 @@ app.rectInit = function() {
     $('#blDone').click(function(event) {
         var blockName = $('#blockName').val();
         $('#blockInfo').modal('toggle');
-        var rect = app.svg.rect().draw().attr({
+        var rect = app.svg.rect().draw({snapToGrid:8}).attr({
           fill: '#d1fffe',
           stroke: "green" ,
           'stroke-width': 4

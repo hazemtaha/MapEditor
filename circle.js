@@ -9,7 +9,7 @@ app.circleInit = function() {
         var blockName = $('#blockName').val();
         $('#blockInfo').modal('toggle');
     var x1,y1,x2,y2,radius,text;
-    var circle = app.svg.circle().draw().attr({
+    var circle = app.svg.circle().draw({snapToGrid:8}).attr({
       fill: '#00FFFF',
       stroke: "blue" ,
       'stroke-width': 4

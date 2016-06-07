@@ -34,7 +34,7 @@ var drawPolygon = function(blockName) {
         app.svg.on('mousedown', function(ev) {
             // place a new point only if the point will exist out of any shapes on the svg
             if (!isInBlock) {
-                polygon.draw(ev).attr('stroke-width', 1).attr('fill', 'none');
+                polygon.draw(ev,{snapToGrid:8}).attr('stroke-width', 1).attr('fill', 'none');
             }
         });
 
