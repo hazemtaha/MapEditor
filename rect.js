@@ -8,7 +8,7 @@ app.rectInit = function() {
     $('#blDone').click(function(event) {
         var blockName = $('#blockName').val();
         $('#blockInfo').modal('toggle');
-        var rect = app.svg.rect().draw().attr({
+        var rect = app.svg.rect().draw({snapToGrid:8}).attr({
           fill: '#1ABC9C',
           stroke: "black" ,
           'stroke-width': 5
@@ -41,7 +41,6 @@ app.rectInit = function() {
         });
         rect.on('drawstop', function(e){
           app.index = app.blocks.push({ shape: rect,name: blockName, type:'rect' });
-          console.log(rect);
           rect.draggable();
           rect.on('dragend', function(e) {
             text.move(rect.bbox().cx,rect.bbox().cy);
@@ -77,7 +76,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false);
                   rect.fill('#FFA07A');
-                  text.text("Living Room"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#reception').on('click',function(){
@@ -85,7 +84,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false);
                   rect.fill('#778899');
-                  text.text("Reception"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#kitchen').on('click',function(){
@@ -93,7 +92,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#C8F0C8');
-                  text.text("Kitchen"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#hallway').on('click',function(){
@@ -101,7 +100,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#FF5733');
-                  text.text("Hallway"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#bed_room').on('click',function(){
@@ -109,7 +108,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#FFC0CB');
-                  text.text("Bed Room"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#bathroom').on('click',function(){
@@ -117,7 +116,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#B0C4DE');
-                  text.text("Bathroom"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#balcony').on('click',function(){
@@ -125,7 +124,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#9ACD32');
-                  text.text("Balcony"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#cloest').on('click',function(){
@@ -133,7 +132,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#7B68EE');
-                  text.text("Cloest"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#other').on('click',function(){
@@ -141,7 +140,7 @@ app.rectInit = function() {
                   {
                   rect.selectize(false)
                   rect.fill('#BA55D3');
-                  text.text("Other"+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
+                  text.text(blockName+"\n"+rect.bbox().w/app.scale(app.width,app.height)+"X"+rect.bbox().h/app.scale(app.width,app.height)).move(rect.bbox().cx,rect.bbox().cy);
                   }
                 });
                 $('#back').on('click',function(){

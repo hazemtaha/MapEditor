@@ -6,7 +6,7 @@ app.ovalInit = function() {
           $('#blockInfo').modal('toggle');
 
     var text;
-    var oval = app.svg.ellipse().draw().attr({
+    var oval = app.svg.ellipse().draw({snapToGrid:8}).attr({
       fill: '#1ABC9C',
       stroke: "black" ,
       'stroke-width': 5
@@ -21,7 +21,7 @@ app.ovalInit = function() {
     });
     //$('#oval_btn').off('click');
     oval.on('drawupdate', function(e){
-      console.log(oval.bbox());
+      //console.log(oval.bbox());
       text.text(blockName+"\n"+oval.bbox().w/(2*app.scale(app.width,app.height))+"X"+oval.bbox().h/(2*app.scale(app.width,app.height))).move(oval.bbox().cx,oval.bbox().cy);
     });
       oval.on('drawstop', function(e){
@@ -49,6 +49,87 @@ app.ovalInit = function() {
             $(document).off('keydown');
           }
         });
+        ////////////
+        $('#setting_btn').on('click',function(){
+          $('#toolbox_btns').addClass('hidden');
+          $('#room_type').removeClass('hidden');
+
+            $('#living').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false);
+              oval.fill('#FFA07A');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
+              }
+            });
+            $('#reception').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false);
+              oval.fill('#778899');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
+            }
+            });
+            $('#kitchen').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#C8F0C8');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);              }
+
+            });
+            $('#hallway').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#FF5733');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);              }
+            });
+            $('#bed_room').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#FFC0CB');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);              }
+            });
+            $('#bathroom').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#B0C4DE');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
+              }
+            });
+            $('#balcony').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#9ACD32');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
+              }
+            });
+            $('#cloest').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#7B68EE');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
+              }
+            });
+            $('#other').on('click',function(){
+              if(oval._memory._selectHandler.rectSelection.isSelected)
+              {
+              oval.selectize(false)
+              oval.fill('#BA55D3');
+              text.text(blockName+"\n"+oval.bbox().w/(app.scale(app.width,app.height)*2)+"X"+oval.bbox().h/(app.scale(app.width,app.height)*2)).move(oval.bbox().cx,oval.bbox().cy);
+              }
+            });
+            $('#back').on('click',function(){
+              $('#toolbox_btns').removeClass('hidden');
+              $('#room_type').addClass('hidden');
+            });
+        });
+        /////////////
       });
       // var testPoint = {x:0,y:0};
       // console.log(app.insideCircle(testPoint,app.blocks[0]));

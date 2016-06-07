@@ -34,7 +34,7 @@ var drawPolygon = function(blockName) {
         app.svg.on('mousedown', function(ev) {
             // place a new point only if the point will exist out of any shapes on the svg
             if (!isInBlock) {
-                polygon.draw(ev).attr('stroke-width', 1).attr('fill', 'none');
+                polygon.draw(ev,{snapToGrid:8}).attr('stroke-width', 1).attr('fill', 'none');
             }
         });
 
@@ -113,7 +113,6 @@ var drawPolygon = function(blockName) {
             });
             // double click to select an element
             polygon.on('dblclick', function(ev) {
-                console.log("dblclick");
                 // enable resizeing
                 polygon.selectize({
                     deepSelect: true
@@ -146,6 +145,7 @@ var drawPolygon = function(blockName) {
                         for (var i = 0; i < textArr.length; i++) {
                             textArr[i].clear();
                         }
+                        blockNameText.clear();
                         $(document).off('keydown');
                     }
                 });
@@ -246,7 +246,6 @@ app.isInsidePoly = function(point, polygon) {
 app.isInAny = function(point, blocks) {
     var isInAny = false,
         shape;
-        console.log(blocks);
     for (var i = 0; i < blocks.length; i++) {
         shape = blocks[i];
         //console.log(shape.type);
